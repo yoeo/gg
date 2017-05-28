@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>GuessLang</title>
+    <link
+      rel="shortcut icon" type="image/ico"
+      href="{{ url_for('static', filename='favicon.png') }}" />
+    <link
+      rel="stylesheet" type="text/css"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='validation.js') }}">
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <h1>Guessing Game</h1>
+      <p>
+        Copy/paste code and let me guess the programming language.
+      </p>
+      <form action="/" method="post">
+        <textarea
+          rows=20 cols=80 name="source-code" id="source-code"
+          required="true">{{source_code}}</textarea>
+        <input
+          type="submit" name="submit" id="submit"
+          value="Guess" />
+      </form>
+      {% if predicted is none %}
+        <!-- 🐼 🐼 🐼 -->
+      {% elif predicted|length == 0 %}
+        <h2>Empty c👽de.</h2>
+      {% elif predicted|length == 1 %}
+        <h1 class="languages"> That's {{predicted.0}} code</h1>
+        <a href="https://www.youtube.com/watch?v=OoAlf0-U7EA">
+          <image src="{{url_for('static', filename='thats-a-penis.png')}}" />
+        </a>
+      {% else %}
+        <h1>
+          Not sure if
+          {% for lang in predicted %}
+            {{lang}}{% if loop.last %} or... {% else %}, {% endif %}
+          {% endfor %}
+        </h1>
+        <a href="https://www.youtube.com/watch?v=OGAu_DeKckI">
+          <image src="{{url_for('static', filename='not-sure-if.png')}}" />
+        </a>
+      {% endif %}
+      <br />
+      <p> {{supported|length}} supported languages:</p>
+      <aside>
+        {% for lang in supported %}
+          {{lang}}{% if loop.last %}.{% else %}, {% endif %}
+        {% endfor %}
+      </aside>
+    </div>
+  </body>
+</html>
