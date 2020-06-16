@@ -14,7 +14,7 @@ The rules are simple:
 
 ## Installation
 
-* Python 3.5+ required
+* Python 3.6+ required
 
 Run the following command from the cloned repository:
 
@@ -41,4 +41,4 @@ Then go to `http://localhost:8000/`
 * Icon created by
   [Mooms (Creative Commons)](https://thenounproject.com/term/thinking/949356/)
 
-* GG — Copyright (c) 2017 Y. SOMDA, [MIT License](LICENSE)
+* GG — Copyright (c) 2020 Y. SOMDA, [MIT License](LICENSE)
