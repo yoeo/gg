@@ -1,3 +1,5 @@
+from statistics import mean, stdev
+
 from flask import Flask, render_template, request
 
 from guesslang import Guess
@@ -12,7 +14,7 @@ guess = Guess()
 @app.route('/', methods=['GET', 'POST'])
 def input_page():
     data = {}
-    data['supported'] = sorted(guess.languages)
+    data['supported'] = sorted(guess.supported_languages)
     data['predicted'] = None
 
     if request.method == 'POST':
@@ -20,7 +22,12 @@ def input_page():
         if not source_code.strip():
             data['predicted'] = []
         else:
-            data['predicted'] = guess.probable_languages(source_code)
+            scores = guess.probabilities(source_code)
+            values = [value for name, value in scores]
+            threshold = mean(values) + stdev(values)
+            data['predicted'] = [
+                name for name, value in scores if value > threshold
+            ]
 
     return render_template('index.html', **data)
 

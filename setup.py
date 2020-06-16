@@ -16,7 +16,7 @@ def list_resources(basedir, resource_dirs):
 setup(
     name="gg",
     author="yoeo",
-    version="0.1",
+    version="0.2",
     url="https://github.com/yoeo/gg",
     license="MIT",
     description="Programming language Gessing Game",
